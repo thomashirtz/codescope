@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from generate_project_summary.config import should_exclude_directory
+from codescope.config import should_exclude_directory
 
 
 def generate_file_tree(path: str, indent_size: int = 4, include_files: bool = True) -> str:

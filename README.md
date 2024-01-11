@@ -1,5 +1,4 @@
-
-# generate-project-summary
+# 💻 codescope
 
 ## Overview
 Generate Project Summary is a Python tool that creates a comprehensive summary of a Python project. It's designed for developers, teams, and even Language Learning Models (LLMs) who want to quickly understand the structure and contents of a new or existing Python project. The tool can be particularly useful for LLMs to quickly have context for a conversation about a codebase. It analyzes the project structure, including its files and directories, and extracts key information such as functions, classes, and their respective docstrings.
@@ -11,18 +10,13 @@ Generate Project Summary is a Python tool that creates a comprehensive summary o
 - **Command-Line Interface**: An easy-to-use CLI for generating project summaries.
 
 ## Installation
-1. Clone the repository:
-   ```
-   git clone https://your-repository-url.git
-   ```
-2. Navigate to the project directory:
-   ```
-   cd generate_project_summary
-   ```
-3. Install the package:
-   ```
-   pip install .
-   ```
+To install codescope, you will need Python installed on your system. Then, codescope can be easily installed using pip by running the following command:
+
+```
+pip install git+https://github.com/thomashirtz/codescope#egg=codescope
+```
+
+This command will install the latest version of codescope directly from the GitHub repository. Once installed, you can utilize the application via the command line using `codescope` or `cs`.
 
 ## Usage
 The tool is used via the command line with various flags to customize the output:
@@ -36,16 +30,9 @@ Optional Flags:
 - `-r`, `--readme`: Include project markdown (README.md) in the summary.
 - `-i`, `--inspection`: Include inspection of functions and classes.
 - `-d`, `--docstrings`: Include docstrings of functions and classes (only valid if inspection is activated).
-- `-a`, `--all`: Include all features in the summary.
+- `-f`, `--full-content`: Include the full content of all files in the project in the summary.
 - `-cb`, `--clipboard`: Copy the summary to the clipboard.
 
-Example command:
-```
-gps -p /path/to/project -o output.txt -a
-```
-
-## Troubleshooting
-- If you encounter [issue], try [solution].
 
 ## Contributing
 Contributions are welcome! Please follow the standard fork, branch, and pull request workflow.
@@ -54,7 +41,18 @@ Contributions are welcome! Please follow the standard fork, branch, and pull req
 For support, questions, or discussions, please open an issue in the GitHub repository.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
-Thanks to all the contributors who have helped with this project.
+     Copyright 2024 Thomas Hirtz
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+

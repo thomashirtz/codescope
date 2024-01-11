@@ -2,7 +2,7 @@ import ast
 from pathlib import Path
 from typing import Union
 
-from generate_project_summary.config import should_exclude_directory
+from codescope.config import should_exclude_directory
 
 
 def extract_ast_item_summary(
@@ -23,11 +23,11 @@ def extract_ast_item_summary(
     """
     indent = '  ' * indent_level
     item_type = 'Method' if indent_level > 0 else item.__class__.__name__.rstrip('Def')
-    summary = f"{indent}{item_type}: {item.name}\n"
+    summary = f"{indent}{item_type}: `{item.name}`\n"
 
     if include_docstrings and (docstring := ast.get_docstring(item)):
         formatted_docstring = docstring.replace('\n', '\n' + indent + '    ').strip()
-        summary += f"{indent}  Docstring: {formatted_docstring}\n"
+        summary += f"{indent}  Docstring: ```{formatted_docstring}```\n"
 
     if isinstance(item, ast.ClassDef):
         for class_item in item.body:
