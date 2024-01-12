@@ -1,5 +1,6 @@
 from pathlib import Path
 from typing import Union
+from codescope.code_structure_extractor import should_exclude_directory
 
 
 def generate_file_contents_summary(path: Union[str, Path]) -> str:
@@ -16,6 +17,8 @@ def generate_file_contents_summary(path: Union[str, Path]) -> str:
     directory = Path(path)
 
     for file in directory.rglob('*.py'):
+        if should_exclude_directory(str(file.parent)):
+            continue
         summary += f"\nIn {file}:\n```\n"
         try:
             with file.open('r', errors='ignore') as file_content:
