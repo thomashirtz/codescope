@@ -1,9 +1,10 @@
 import argparse
+
 from codescope.core import compile_project_summary
 from codescope.utilities import export_summary
 
 
-def main():
+def main() -> None:
     """
     Entry point for the command line interface to generate a comprehensive summary of a Python project.
 
@@ -36,45 +37,47 @@ def main():
 
     parser = argparse.ArgumentParser(
         description="Generates a comprehensive summary of a Python project, "
-                    "including file structure, README contents, and details of functions and classes."
+        "including file structure, README contents, and details of functions and classes."
     )
     parser.add_argument(
-        'project_path', nargs='?', default='.',
-        help='The file path to the root of the Python project. '
-             'Defaults to the current directory if not specified.'
+        "project_path",
+        nargs="?",
+        default=".",
+        help="The file path to the root of the Python project. " "Defaults to the current directory if not specified.",
     )
 
     parser.add_argument(
-        '-r', '--readme', action='store_true',
-        help='Include the content of the README.md file in the summary.'
+        "-r", "--readme", action="store_true", help="Include the content of the README.md file in the summary."
     )
     parser.add_argument(
-        '-i', '--inspection', action='store_true',
-        help='Include a summary of functions and classes found in the project.'
+        "-i",
+        "--inspection",
+        action="store_true",
+        help="Include a summary of functions and classes found in the project.",
     )
     parser.add_argument(
-        '-d', '--docstrings', action='store_true',
-        help='Include docstrings in the summary of functions and classes. '
-             'This option is effective only if the inspection flag is also activated.'
+        "-d",
+        "--docstrings",
+        action="store_true",
+        help="Include docstrings in the summary of functions and classes. "
+        "This option is effective only if the inspection flag is also activated.",
     )
+    parser.add_argument("-p", "--prompt", action="store_true", help="Include prompt asking to summarize. ")
     parser.add_argument(
-        '-p', '--prompt', action='store_true',
-        help='Include prompt asking to summarize. '
-    )
-    parser.add_argument(
-        '-f', '--full-content', action='store_true',
-        help='Include the full content of all files in the project in the summary.'
+        "-f",
+        "--full-content",
+        action="store_true",
+        help="Include the full content of all files in the project in the summary.",
     )
 
     parser.add_argument(
-        '-o', '--output-filepath', type=str,
-        help='The path where the generated summary should be saved. '
-             'If not specified, the summary is printed to the console.'
+        "-o",
+        "--output-filepath",
+        type=str,
+        help="The path where the generated summary should be saved. "
+        "If not specified, the summary is printed to the console.",
     )
-    parser.add_argument(
-        '-cb', '--clipboard', action='store_true',
-        help='Copy the generated summary to the clipboard.'
-    )
+    parser.add_argument("-cb", "--clipboard", action="store_true", help="Copy the generated summary to the clipboard.")
     args = parser.parse_args()
 
     # Determine if any specific features are requested

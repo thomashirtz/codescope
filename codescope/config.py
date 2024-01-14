@@ -1,8 +1,8 @@
 from pathlib import Path
-from typing import Optional, List
+from typing import List, Optional
 
-DELIMITER = '\n---\n'
-EXCLUDED_DIRECTORIES = ['venv', '__pycache__']
+DELIMITER = "\n---\n"
+EXCLUDED_DIRECTORIES = ["venv", "__pycache__"]
 
 
 def is_hidden_directory(path: Path) -> bool:
@@ -15,7 +15,7 @@ def is_hidden_directory(path: Path) -> bool:
     Returns:
         bool: True if it's a hidden directory, False otherwise.
     """
-    return any(part.startswith('.') and part != '.' for part in path.parts)
+    return any(part.startswith(".") and part != "." for part in path.parts)
 
 
 def is_excluded_directory(path: Path, custom_exclusions: Optional[List[str]] = None) -> bool:

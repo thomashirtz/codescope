@@ -1,19 +1,18 @@
-from codescope.analyzers.file_content import extract_file_contents
 from codescope.analyzers.code_structure import summarize_project_code
+from codescope.analyzers.file_content import extract_file_contents
 from codescope.analyzers.hierarchy import generate_file_hierarchy
-
 from codescope.analyzers.readme import get_readme_content
 from codescope.config import DELIMITER
 
 
 def compile_project_summary(
-        project_path: str,
-        include_tree: bool,
-        include_inspection: bool,
-        include_readme: bool,
-        include_docstrings: bool,
-        include_full_file_content: bool,
-        include_context_prompt: bool = True,
+    project_path: str,
+    include_tree: bool,
+    include_inspection: bool,
+    include_readme: bool,
+    include_docstrings: bool,
+    include_full_file_content: bool,
+    include_context_prompt: bool = True,
 ) -> str:
     """
     Compiles a detailed summary of a Python project from various components.

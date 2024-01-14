@@ -17,7 +17,7 @@ def get_readme_content(project_path: str) -> str:
     Raises:
         FileNotFoundError: Raised if README.md does not exist at the specified path, but handled internally.
     """
-    readme_path = Path(project_path) / 'README.md'
+    readme_path = Path(project_path) / "README.md"
     try:
         return readme_path.read_text()
     except FileNotFoundError:

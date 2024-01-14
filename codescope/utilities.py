@@ -1,14 +1,10 @@
 from pathlib import Path
 from typing import Optional
 
-from pyperclip import copy
+from clipboard import copy
 
 
-def export_summary(
-        summary: str,
-        output_filepath: Optional[str],
-        clipboard: bool
-) -> None:
+def export_summary(summary: str, output_filepath: Optional[str], clipboard: bool) -> None:
     """
     Outputs the given project summary to a file, clipboard, or console.
 
@@ -31,7 +27,7 @@ def export_summary(
 
     if output_filepath:
         try:
-            with Path(output_filepath).open('w') as file:
+            with Path(output_filepath).open("w") as file:
                 file.write(summary)
             print(f"Summary written to {output_filepath}")
         except FileNotFoundError:

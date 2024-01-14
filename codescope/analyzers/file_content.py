@@ -17,15 +17,15 @@ def extract_file_contents(path: Union[str, Path]) -> str:
     summary = "Each file's content is presented below, delimited by three `.\n\n"
     directory = Path(path)
 
-    for file in directory.rglob('*.py'):
+    for file in directory.rglob("*.py"):
         if should_exclude_directory(str(file.parent)):
             continue
         summary += f"\nIn {file}:\n```\n"
         try:
-            with file.open('r', errors='ignore') as file_content:
+            with file.open("r", errors="ignore") as file_content:
                 summary += file_content.read()
         except IOError as e:
             summary += f"Error reading file {file}: {e}"
-        summary += '```\n\n'
+        summary += "```\n\n"
 
     return summary

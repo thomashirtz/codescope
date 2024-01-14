@@ -22,7 +22,7 @@ def generate_file_hierarchy(path: str, indent_size: int = 4, include_files: bool
     root_path = Path(path)
     tree_structure = ""
 
-    def add_directory_to_tree(directory: Path, level: int):
+    def add_directory_to_tree(directory: Path, level: int) -> None:
         """
         Recursively adds directories and (optionally) files to the tree structure.
 
@@ -40,7 +40,7 @@ def generate_file_hierarchy(path: str, indent_size: int = 4, include_files: bool
             return
 
         # Indent the directory name based on its level
-        indent = ' ' * indent_size * level
+        indent = " " * indent_size * level
         tree_structure += f"{indent}{directory.name}/\n"
 
         # Iterate over items in the directory

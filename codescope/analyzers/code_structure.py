@@ -6,9 +6,7 @@ from codescope.config import should_exclude_directory
 
 
 def summarize_ast_item(
-        item: Union[ast.FunctionDef, ast.ClassDef],
-        include_docstrings: bool,
-        indent_level: int = 0
+    item: Union[ast.FunctionDef, ast.ClassDef], include_docstrings: bool, indent_level: int = 0
 ) -> str:
     """
     Extracts and formats a summary from an AST item, which can be a function or a class.
@@ -21,12 +19,12 @@ def summarize_ast_item(
     Returns:
         str: The formatted summary of the given AST item.
     """
-    indent = '  ' * indent_level
-    item_type = 'Method' if indent_level > 0 else item.__class__.__name__.rstrip('Def')
+    indent = "  " * indent_level
+    item_type = "Method" if indent_level > 0 else item.__class__.__name__.rstrip("Def")
     summary = f"{indent}{item_type}: `{item.name}`\n"
 
     if include_docstrings and (docstring := ast.get_docstring(item)):
-        formatted_docstring = docstring.replace('\n', '\n' + indent + '    ').strip()
+        formatted_docstring = docstring.replace("\n", "\n" + indent + "    ").strip()
         summary += f"{indent}  Docstring: ```{formatted_docstring}```\n"
 
     if isinstance(item, ast.ClassDef):
@@ -37,10 +35,7 @@ def summarize_ast_item(
     return summary
 
 
-def summarize_python_file(
-        filepath: Path,
-        include_docstring: bool
-) -> str:
+def summarize_python_file(filepath: Path, include_docstring: bool) -> str:
     """
     Extracts and summarizes functions and classes from a Python file.
 
@@ -54,22 +49,19 @@ def summarize_python_file(
     summary = "\n"
 
     try:
-        with filepath.open('r') as file:
+        with filepath.open("r") as file:
             parsed_file = ast.parse(file.read(), filename=str(filepath))
 
         for item in parsed_file.body:
             if isinstance(item, (ast.FunctionDef, ast.ClassDef)):
-                summary += summarize_ast_item(item, include_docstring) + '\n'
+                summary += summarize_ast_item(item, include_docstring) + "\n"
     except IOError as e:
         summary += f"Error reading file {filepath}: {e}\n"
 
     return summary
 
 
-def summarize_project_code(
-        path: Union[str, Path],
-        include_docstrings: bool
-) -> str:
+def summarize_project_code(path: Union[str, Path], include_docstrings: bool) -> str:
     """
     Generates a summary of functions and classes for all Python files in the specified directory.
 
@@ -83,7 +75,7 @@ def summarize_project_code(
     summary = ""
     directory = Path(path)
 
-    for file in directory.rglob('*.py'):
+    for file in directory.rglob("*.py"):
         if should_exclude_directory(str(file.parent)):
             continue
         summary += f"\nIn {file}:\n"
