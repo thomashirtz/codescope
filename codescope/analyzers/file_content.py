@@ -1,9 +1,10 @@
 from pathlib import Path
 from typing import Union
-from codescope.code_structure_extractor import should_exclude_directory
+
+from codescope.config import should_exclude_directory
 
 
-def generate_file_contents_summary(path: Union[str, Path]) -> str:
+def extract_file_contents(path: Union[str, Path]) -> str:
     """
     Generates a summary of the contents of all Python files in the specified directory.
 

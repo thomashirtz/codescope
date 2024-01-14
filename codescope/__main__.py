@@ -1,5 +1,6 @@
 import argparse
-from codescope.core import generate_codebase_summary
+from codescope.core import compile_project_summary
+from codescope.utilities import export_summary
 
 
 def main():
@@ -42,15 +43,7 @@ def main():
         help='The file path to the root of the Python project. '
              'Defaults to the current directory if not specified.'
     )
-    parser.add_argument(
-        '-o', '--output-filepath', type=str,
-        help='The path where the generated summary should be saved. '
-             'If not specified, the summary is printed to the console.'
-    )
-    parser.add_argument(
-        '-t', '--tree', action='store_true',
-        help='Include the file tree structure of the project in the summary.'
-    )
+
     parser.add_argument(
         '-r', '--readme', action='store_true',
         help='Include the content of the README.md file in the summary.'
@@ -65,8 +58,18 @@ def main():
              'This option is effective only if the inspection flag is also activated.'
     )
     parser.add_argument(
+        '-p', '--prompt', action='store_true',
+        help='Include prompt asking to summarize. '
+    )
+    parser.add_argument(
         '-f', '--full-content', action='store_true',
         help='Include the full content of all files in the project in the summary.'
+    )
+
+    parser.add_argument(
+        '-o', '--output-filepath', type=str,
+        help='The path where the generated summary should be saved. '
+             'If not specified, the summary is printed to the console.'
     )
     parser.add_argument(
         '-cb', '--clipboard', action='store_true',
@@ -75,22 +78,26 @@ def main():
     args = parser.parse_args()
 
     # Determine if any specific features are requested
-    specific_features_requested = args.tree or args.readme or args.inspection or args.docstrings or args.full_content
+    specific_features_requested = args.readme or args.inspection or args.docstrings or args.full_content or args.prompt
 
     # Set flags based on user input or default to full features if no specific features are requested
-    include_tree = args.tree if specific_features_requested else True
+    include_context_prompt = args.prompt if specific_features_requested else True
     include_readme = args.readme if specific_features_requested else True
     include_inspection = args.inspection if specific_features_requested else True
     include_docstrings = args.docstrings if specific_features_requested and args.inspection else include_inspection
     include_full_file_content = args.full_content
 
-    generate_codebase_summary(
+    summary = compile_project_summary(
         project_path=args.project_path,
-        include_tree=include_tree,
+        include_tree=True,
         include_inspection=include_inspection,
-        include_docstrings=include_docstrings,
         include_readme=include_readme,
+        include_docstrings=include_docstrings,
+        include_context_prompt=include_context_prompt,
         include_full_file_content=include_full_file_content,
+    )
+    export_summary(
+        summary=summary,
         output_filepath=args.output_filepath,
         clipboard=args.clipboard,
     )

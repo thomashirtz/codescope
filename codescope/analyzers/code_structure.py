@@ -5,7 +5,7 @@ from typing import Union
 from codescope.config import should_exclude_directory
 
 
-def extract_ast_item_summary(
+def summarize_ast_item(
         item: Union[ast.FunctionDef, ast.ClassDef],
         include_docstrings: bool,
         indent_level: int = 0
@@ -14,7 +14,7 @@ def extract_ast_item_summary(
     Extracts and formats a summary from an AST item, which can be a function or a class.
 
     Args:
-        item (Union[ast.FunctionDef, ast.ClassDef]): The AST node representing a function or class.
+        item (Union[ast.FunctionDef, ast.ClassDef]): The AST item representing a function or class.
         include_docstrings (bool): Whether to include docstrings in the summary.
         indent_level (int): The level of indentation for formatting the summary.
 
@@ -32,12 +32,12 @@ def extract_ast_item_summary(
     if isinstance(item, ast.ClassDef):
         for class_item in item.body:
             if isinstance(class_item, ast.FunctionDef):
-                summary += extract_ast_item_summary(class_item, include_docstrings, indent_level + 1)
+                summary += summarize_ast_item(class_item, include_docstrings, indent_level + 1)
 
     return summary
 
 
-def extract_functions_and_classes(
+def summarize_python_file(
         filepath: Path,
         include_docstring: bool
 ) -> str:
@@ -55,18 +55,18 @@ def extract_functions_and_classes(
 
     try:
         with filepath.open('r') as file:
-            node = ast.parse(file.read(), filename=str(filepath))
+            parsed_file = ast.parse(file.read(), filename=str(filepath))
 
-        for item in node.body:
+        for item in parsed_file.body:
             if isinstance(item, (ast.FunctionDef, ast.ClassDef)):
-                summary += extract_ast_item_summary(item, include_docstring) + '\n'
+                summary += summarize_ast_item(item, include_docstring) + '\n'
     except IOError as e:
         summary += f"Error reading file {filepath}: {e}\n"
 
     return summary
 
 
-def extract_functions_classes_summary(
+def summarize_project_code(
         path: Union[str, Path],
         include_docstrings: bool
 ) -> str:
@@ -87,6 +87,6 @@ def extract_functions_classes_summary(
         if should_exclude_directory(str(file.parent)):
             continue
         summary += f"\nIn {file}:\n"
-        summary += extract_functions_and_classes(file, include_docstring=include_docstrings)
+        summary += summarize_python_file(file, include_docstring=include_docstrings)
 
     return summary

@@ -3,7 +3,7 @@ from pathlib import Path
 from codescope.config import should_exclude_directory
 
 
-def generate_file_tree(path: str, indent_size: int = 4, include_files: bool = True) -> str:
+def generate_file_hierarchy(path: str, indent_size: int = 4, include_files: bool = True) -> str:
     """
     Generates a visual tree structure of the file system starting from the specified path.
 
