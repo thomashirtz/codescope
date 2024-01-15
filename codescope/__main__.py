@@ -17,7 +17,6 @@ def main() -> None:
     Command Line Arguments:
         project_path (str): The file path to the root of the Python project. Defaults to the current directory.
         -o, --output-filepath (str): Path to save the generated summary. If not specified, outputs to the console.
-        -t, --tree (flag): Include the project's file tree structure in the summary.
         -r, --readme (flag): Include the project's README.md content in the summary.
         -i, --inspection (flag): Include a summary of functions and classes in the project.
         -d, --docstrings (flag): Include docstrings in the summary of functions and classes. Requires inspection flag.
@@ -47,7 +46,10 @@ def main() -> None:
     )
 
     parser.add_argument(
-        "-r", "--readme", action="store_true", help="Include the content of the README.md file in the summary."
+        "-r",
+        "--readme",
+        action="store_true",
+        help="Include the content of the README.md file in the summary."
     )
     parser.add_argument(
         "-i",
@@ -62,7 +64,12 @@ def main() -> None:
         help="Include docstrings in the summary of functions and classes. "
         "This option is effective only if the inspection flag is also activated.",
     )
-    parser.add_argument("-p", "--prompt", action="store_true", help="Include prompt asking to summarize. ")
+    parser.add_argument(
+        "-p",
+        "--prompt",
+        action="store_true",
+        help="Include prompt asking to summarize. "
+    )
     parser.add_argument(
         "-f",
         "--full-content",
@@ -77,7 +84,12 @@ def main() -> None:
         help="The path where the generated summary should be saved. "
         "If not specified, the summary is printed to the console.",
     )
-    parser.add_argument("-cb", "--clipboard", action="store_true", help="Copy the generated summary to the clipboard.")
+    parser.add_argument(
+        "-cb",
+        "--clipboard",
+        action="store_true",
+        help="Copy the generated summary to the clipboard."
+    )
     args = parser.parse_args()
 
     # Determine if any specific features are requested
