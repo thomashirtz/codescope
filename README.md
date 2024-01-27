@@ -1,7 +1,7 @@
-# 💻 codescope
+# 💻 `codescope`
 
 ## Overview
-Generate Project Summary is a Python tool that creates a comprehensive summary of a Python project. It's designed for developers, teams, and even Language Learning Models (LLMs) who want to quickly understand the structure and contents of a new or existing Python project. The tool can be particularly useful for LLMs to quickly have context for a conversation about a codebase. It analyzes the project structure, including its files and directories, and extracts key information such as functions, classes, and their respective docstrings.
+`codescope` is a Python tool that creates a comprehensive summary of a Python project. It's designed for developers, teams, and even Language Learning Models (LLMs) who want to quickly understand the structure and contents of a new or existing Python project. The tool can be particularly useful for LLMs to quickly have context for a conversation about a codebase. It analyzes the project structure, including its files and directories, and extracts key information such as functions, classes, and their respective docstrings.
 
 ## Features
 - **Project Overview**: Includes content from the project's README.md.
