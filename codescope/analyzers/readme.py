@@ -19,6 +19,6 @@ def get_readme_content(project_path: str) -> str:
     """
     readme_path = Path(project_path) / "README.md"
     try:
-        return readme_path.read_text()
+        return readme_path.read_text(encoding='utf-8')
     except FileNotFoundError:
         return "No README.md found.\n"
